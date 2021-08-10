@@ -1,3 +1,4 @@
+/**
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,10 +17,11 @@ public class extends Application {
         primaryStage.show(); // display the stage
     }
     
-    /**
-     * The main method is here just so it is convenient to run from the IDE
-     */
+
+    // The main method is here just so it is convenient to run from the IDE
+     
     public static void main(String[] args) {
         Application.launch(args);
     }
 }
+*/
