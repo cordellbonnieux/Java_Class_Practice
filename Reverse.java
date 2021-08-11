@@ -29,5 +29,6 @@ public class Reverse {
 
         System.out.println("Backwards: " + reverse);
 
+        read.close();
     }
 }
