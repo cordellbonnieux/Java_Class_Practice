@@ -7,6 +7,7 @@ public class Search {
         // create search objects
         BinarySearch binary = new BinarySearch();
         LinearSearch linear = new LinearSearch();
+        QuickSort quick = new QuickSort();
 
         // create options panel
         JPanel options = optionsPanel();
@@ -30,30 +31,34 @@ public class Search {
                     break;
                 
                 case 3:
+                    if (!isSorted(list))
+                        list = quick.sort(list);
+                    else 
+                        JOptionPane.showMessageDialog(null, "Your list is already sorted");
                     break;
                 
-                case 4: if (isSorted(list)) {
-                    String selection = JOptionPane.showInputDialog(null, "What number are you looking for in your list?");
-                    int key = Integer.parseInt(selection);
-                    int index = binary.search(list, key);
-                    if (index < 0)
-                        JOptionPane.showMessageDialog(null, "Looks like the key: " + key + " could not be found in your list.");
-                    else 
-                    JOptionPane.showMessageDialog(null, "The key: " + key + " is located at index: " + index + " in your list.");
+                case 4: 
+                    if (isSorted(list)) {
+                        String selection = JOptionPane.showInputDialog(null, "What number are you looking for in your list?");
+                        int key = Integer.parseInt(selection);
+                        int index = binary.search(list, key);
+                        if (index < 0)
+                            JOptionPane.showMessageDialog(null, "Looks like the key: " + key + " could not be found in your list.");
+                        else 
+                        JOptionPane.showMessageDialog(null, "The key: " + key + " is located at index: " + index + " in your list.");
 
-                    } else JOptionPane.showMessageDialog(null, "You need to sort the list before you can perform binary search.");
+                    } else 
+                        JOptionPane.showMessageDialog(null, "You need to sort the list before you can perform binary search.");
                     break;
 
-                case 5: if (isSorted(list)) {
+                case 5:
                     String selection = JOptionPane.showInputDialog(null, "What number are you looking for in your list?");
                     int key = Integer.parseInt(selection);
                     int index = linear.search(list, key);
                     if (index < 0)
                         JOptionPane.showMessageDialog(null, "Looks like the key: " + key + " could not be found in your list.");
                     else 
-                    JOptionPane.showMessageDialog(null, "The key: " + key + " is located at index: " + index + " in your list.");
-
-                    } else JOptionPane.showMessageDialog(null, "You need to sort the list before you can perform binary search.");
+                        JOptionPane.showMessageDialog(null, "The key: " + key + " is located at index: " + index + " in your list.");
                     break;
                 
                 case 6: System.exit(0);
