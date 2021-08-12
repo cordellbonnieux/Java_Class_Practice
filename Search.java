@@ -75,7 +75,7 @@ public class Search {
 
         JPanel panel = new JPanel();
         JPanel c = new JPanel();
-        c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+        c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
         panel.add(c);
 
         JLabel choose = new JLabel("What would you like to do?");

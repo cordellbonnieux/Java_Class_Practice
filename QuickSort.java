@@ -1,5 +1,7 @@
 import java.util.*;
-
+/**
+ * Quick Sorts a list of integers
+ */
 public class QuickSort {
     int[] sort(int[] list) {
         quickSort(list, 0, list.length - 1);
