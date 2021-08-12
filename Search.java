@@ -1,4 +1,3 @@
-import java.util.*;
 import javax.swing.*;
 
 public class Search {
@@ -7,22 +6,59 @@ public class Search {
 
         // create search objects
         BinarySearch binary = new BinarySearch();
+        LinearSearch linear = new LinearSearch();
 
         // create options panel
         JPanel options = optionsPanel();
 
-        // Ask the user what they'd like to do
-        String choice = JOptionPane.showInputDialog(null, options);
+        // get a list
+        int[] list = getList();
 
-        switch (choice) {
-            
+        while (list.length > 0){
+
+            // Ask the user what they'd like to do
+            String input = JOptionPane.showInputDialog(null, options);
+            int choice = Integer.parseInt(input);
+
+            switch (choice) {
+                case 1: list = getList();
+                    break;
+
+                case 2: String stringList = "";
+                    for (int i = 0; i < list.length; i++) stringList += i < list.length - 1 ? list[i] + ", " : list[i];
+                    JOptionPane.showMessageDialog(null, stringList);
+                    break;
+                
+                case 3:
+                    break;
+                
+                case 4: if (isSorted(list)) {
+                    String selection = JOptionPane.showInputDialog(null, "What number are you looking for in your list?");
+                    int key = Integer.parseInt(selection);
+                    int index = binary.search(list, key);
+                    if (index < 0)
+                        JOptionPane.showMessageDialog(null, "Looks like the key: " + key + " could not be found in your list.");
+                    else 
+                    JOptionPane.showMessageDialog(null, "The key: " + key + " is located at index: " + index + " in your list.");
+
+                    } else JOptionPane.showMessageDialog(null, "You need to sort the list before you can perform binary search.");
+                    break;
+
+                case 5: if (isSorted(list)) {
+                    String selection = JOptionPane.showInputDialog(null, "What number are you looking for in your list?");
+                    int key = Integer.parseInt(selection);
+                    int index = linear.search(list, key);
+                    if (index < 0)
+                        JOptionPane.showMessageDialog(null, "Looks like the key: " + key + " could not be found in your list.");
+                    else 
+                    JOptionPane.showMessageDialog(null, "The key: " + key + " is located at index: " + index + " in your list.");
+
+                    } else JOptionPane.showMessageDialog(null, "You need to sort the list before you can perform binary search.");
+                    break;
+                
+                case 6: System.exit(0);
+            }
         }
-
-
-
-
-        //System.out.println(binary.search(list, 12));
-
     }
 
     /**
@@ -32,8 +68,8 @@ public class Search {
     public static JPanel optionsPanel() {
 
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         JPanel c = new JPanel();
+        c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
         panel.add(c);
 
         JLabel choose = new JLabel("What would you like to do?");
@@ -53,6 +89,9 @@ public class Search {
 
         JLabel option5 = new JLabel("Linear Search: 5");
         c.add(option5);
+
+        JLabel option6 = new JLabel("Exit program: 6");
+        c.add(option6);
 
         return panel;
     }
@@ -79,5 +118,14 @@ public class Search {
             }
         
         return list;
+    }
+
+    public static boolean isSorted(int[] arr) {
+
+        for (int i = 0; i < arr.length; i++)
+            if (i < arr.length - 1)
+                if (arr[i] > arr[i + 1])
+                    return false;
+        return true;
     }
 }
