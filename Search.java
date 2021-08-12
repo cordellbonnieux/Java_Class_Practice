@@ -31,9 +31,10 @@ public class Search {
                     break;
                 
                 case 3:
-                    if (!isSorted(list))
+                    if (!isSorted(list)) {
                         list = quick.sort(list);
-                    else 
+                        JOptionPane.showMessageDialog(null, "Your list has been sorted in ascending order");
+                    } else 
                         JOptionPane.showMessageDialog(null, "Your list is already sorted");
                     break;
                 
