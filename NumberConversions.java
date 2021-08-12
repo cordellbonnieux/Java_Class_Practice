@@ -1,44 +1,61 @@
 public class NumberConversions {
     /**
-     * Converts a decimal to binary (represented as an int).
+     * Converts a decimal to any base from 2 to 16
      * example: 13_10 == ?_2
      * 13 / 2 = 6, remainder = 1
      * 6 / 2 = 3, remainder = 0
      * 3 / 2 = 1, remainder = 1
      * 1 / 2 = 0, remainder = 1
      * @param int decimal number
-     * @return int binary number representation
+     * @return string representing the converted decimal number 
      */
-    public static int decimal2Binary(int decimal) {
+    public static String decimal2Base(int decimal, int base) {
       
         int quotient = decimal, remainder = 0;
-        String binary = "", reversed = "";
+        String answer = "", reversed = "";
 
         while (quotient > 0) {
-            quotient = decimal / 2;
-            remainder = decimal % 2;
-            decimal /= 2;
-            reversed += String.valueOf(remainder);
+            quotient = decimal / base;
+            remainder = decimal % base;
+            decimal /= base;
+
+            switch (remainder) {
+                case 10: reversed += "A";
+                    break;
+                case 11: reversed += "B";
+                    break;
+                case 12: reversed += "C";
+                    break;
+                case 13: reversed += "D";
+                    break;
+                case 14: reversed += "E";
+                    break;
+                case 15: reversed += "F";
+                    break;
+                default: reversed += String.valueOf(remainder);
+            }
+            
         }
 
         for (int i = reversed.length() - 1; i >= 0; i--)
-            binary += String.valueOf(reversed.charAt(i));
+            answer += String.valueOf(reversed.charAt(i));
+         
         
-        return Integer.valueOf(binary);
-    }
-
-    /**
-     * Decimal to other bases
-     * @param 
-     */
-    public static int decimal2OtherBases(int decimal, int base) {
-        
+        return answer;
     }
 
     public static void main(String[] args) {
+
         int decimalNumber = 13;
-        int binary = decimal2Binary(decimalNumber);
-        System.out.println(binary);
+
+        String binary = decimal2Base(decimalNumber, 2),
+            octal = decimal2Base(decimalNumber, 8),
+            hex = decimal2Base(decimalNumber, 16);
+
+        System.out.println("binary: " + binary);
+        System.out.println("octal: " + octal);
+        System.out.println("hex: " + hex);
+
         System.exit(0);
     }
 }
